@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "441837604658",
+    "firebase_url": "https://aplicatiecarti-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "aplicatiecarti",
+    "storage_bucket": "aplicatiecarti.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:441837604658:android:3d802edc6c482824c0d12b",
+        "android_client_info": {
+          "package_name": "com.example.my_project"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "441837604658-n3m3kcrgit70s14coc94jk6qilm2a2ob.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDqTrYsenQOxqRvzSGS3X8A-cdo4x-v5WU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "441837604658-n3m3kcrgit70s14coc94jk6qilm2a2ob.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
