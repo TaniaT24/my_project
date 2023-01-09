@@ -54,10 +54,45 @@ class _ContScreenState extends State<ContScreen> {
         decoration: BoxDecoration(
           image: new DecorationImage(image: new AssetImage("assets/images/logodar.jpg"), fit: BoxFit.cover,opacity: 38),
           ),
-          
-   
+        child:
+  SizedBox(
+  
+    height: 210,
+    child: Card(
+      child: Column(
+        children: [
+          ListTile(
+            title: Text('My Account'),
+           
+            leading: Icon(
+              Icons.restaurant_menu,
+              color: Colors.blue[500],
+            ),
           ),
-          
+          const Divider(),
+          ListTile(
+            title:Text(
+              user.email!,
+              style: TextStyle(fontWeight: FontWeight.w500),
+            ),
+            leading: Icon(
+              Icons.contact_phone,
+              color: Colors.blue[500],
+            ),
+          ),
+          ListTile(
+            title: Text('Number of read books:'),
+            leading: Icon(
+              Icons.format_list_numbered,
+              color: Colors.blue[500],
+            ),
+          ),
+        ],
+      ),
+    ),
+  ),
+
+  ), 
            bottomNavigationBar: BottomAppBar(
         color: Color.fromARGB(255, 17, 17, 16),
         // this creates a notch in the center of the bottom bar
