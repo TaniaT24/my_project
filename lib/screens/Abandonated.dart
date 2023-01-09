@@ -26,21 +26,31 @@ class _Abandonated extends State<Abandonated> {
 
   late DatabaseReference _booksRef;
 
+   final user=FirebaseAuth.instance.currentUser!;
+
+
+    signOut () async
+   {
+
+      await FirebaseAuth.instance.signOut();
+      Navigator.pushReplacement( context, MaterialPageRoute(builder: (context) => SignInScreen()));
+   }
+
   @override
   
   void initState() {
 
     final FirebaseDatabase database= FirebaseDatabase.instance;
-    _booksRef=database.reference().child('Abandonated');
+    _booksRef=database.reference().child(user.uid).child('Abandonated');
 
     super.initState();
     
   }
 
 
-   List<String> items= ['Read', 'Currently', 'WantToRead'];
+   List<String> items= ['Read', 'Currently', 'WantToRead','Abandonated'];
    
-   String dropdownValue='Read';
+   String dropdownValue='Abandonated';
 
 
   @override
@@ -76,7 +86,7 @@ class _Abandonated extends State<Abandonated> {
 
                     ),
                     TextButton(
-                      onPressed: () { ref.child('Abandonated').push().child(bookName).set(bookController.text).asStream();
+                      onPressed: () { ref.child(user.uid).child('Abandonated').push().child(bookName).set(bookController.text).asStream();
                       bookController.clear();
                       } , 
                       child: Text(' ADD ABANDONATED BOOK' ,style:TextStyle(color: Colors.white) ,selectionColor: Colors.brown,),
@@ -86,7 +96,49 @@ class _Abandonated extends State<Abandonated> {
                       Animation<double> animation,
                       int index) {              
                         return new ListTile(
-                          trailing: IconButton(icon: Icon(Icons.delete),color: Colors.black, onPressed: () => _booksRef.child(snapshot.key.toString()).remove(),),
+                          trailing: Wrap(children:[ IconButton(icon: Icon(Icons.delete),color: Colors.black, onPressed: () => _booksRef.child(snapshot.key.toString()).remove(),),
+                         
+                         
+                          DropdownButton<String>(
+      value: dropdownValue, dropdownColor: Colors.black,
+      icon: const Icon(Icons.arrow_downward), iconEnabledColor: Colors.black,
+      elevation: 16,
+      style: const TextStyle(color: Color.fromARGB(255, 202, 196, 212)),
+      underline: Container(
+        height: 2,
+        color: Color.fromARGB(255, 16, 14, 12),
+      ),   
+      items: items.map<DropdownMenuItem<String>>((String items) {
+        return DropdownMenuItem<String>(
+          value: items,
+          child: Text(items),
+        );
+      }).toList(),
+      
+       onChanged: (String? newvalue) {
+        // This is called when the user selects an item.
+      
+
+        if(newvalue=='Currently')
+       { ref.child(user.uid).child(newvalue!).push().child('Book CName').set(snapshot.value['Book AName'] );
+       _booksRef.child(snapshot.key.toString()).remove();}
+
+
+       if(newvalue=='Read')
+       { ref.child(user.uid).child(newvalue!).push().child('Book Name').set(snapshot.value['Book AName'] );
+        _booksRef.child(snapshot.key.toString()).remove();
+       }
+        if(newvalue=='WantToRead')
+        {ref.child(user.uid).child(newvalue!).push().child('Book wName').set(snapshot.value['Book AName'] );
+         _booksRef.child(snapshot.key.toString()).remove();}
+
+
+      },
+      )
+                   ]),
+                         
+                                                
+                         
                           title: new Text(snapshot.value['Book AName'] ,style: TextStyle(color:Colors.black,backgroundColor: Color.fromARGB(196, 255, 219, 219), fontStyle: FontStyle.italic,fontSize: 20,fontWeight:FontWeight.bold),),
                         );
                       })),],
@@ -119,8 +171,7 @@ class _Abandonated extends State<Abandonated> {
                 Icons.login,
                 color: Colors.white,
               ),
-              onPressed: () =>  Navigator.push(
-            context, MaterialPageRoute(builder: (context) => SignInScreen()))
+              onPressed: () => signOut()
             ),
             const SizedBox(
               width: 20

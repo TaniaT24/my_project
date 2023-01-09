@@ -27,12 +27,22 @@ class _Currently extends State<Currently> {
 
   late DatabaseReference _booksRef;
 
+   final user=FirebaseAuth.instance.currentUser!;
+
+
+    signOut () async
+   {
+
+      await FirebaseAuth.instance.signOut();
+      Navigator.pushReplacement( context, MaterialPageRoute(builder: (context) => SignInScreen()));
+   }
+
   @override
   
   void initState() {
 
     final FirebaseDatabase database= FirebaseDatabase.instance;
-    _booksRef=database.reference().child('Currently');
+    _booksRef=database.reference().child(user.uid).child('Currently');
 
     super.initState();
     
@@ -74,7 +84,7 @@ class _Currently extends State<Currently> {
 
                     ),
                     TextButton(
-                      onPressed: () { ref.child('Currently').push().child(bookName).set(bookController.text).asStream();
+                      onPressed: () { ref.child(user.uid).child('Currently').push().child(bookName).set(bookController.text).asStream();
                       bookController.clear();
                       } , 
                       child: Text(' ADD CURRENT BOOK' ,style:TextStyle(color: Colors.white) ,selectionColor: Colors.brown,),
@@ -105,12 +115,12 @@ class _Currently extends State<Currently> {
        onChanged: (String? newvalue) {
         // This is called when the user selects an item.
         if(newvalue=='Read')
-       { ref.child(newvalue!).push().child('Book Name').set(snapshot.value['Book CName'] );
+       { ref.child(user.uid).child(newvalue!).push().child('Book Name').set(snapshot.value['Book CName'] );
          _booksRef.child(snapshot.key.toString()).remove();
        }
 
        if(newvalue=='Abandonated')
-       { ref.child(newvalue!).push().child('Book AName').set(snapshot.value['Book CName']);
+       { ref.child(user.uid).child(newvalue!).push().child('Book AName').set(snapshot.value['Book CName']);
         _booksRef.child(snapshot.key.toString()).remove();
        }
       },
@@ -149,8 +159,7 @@ class _Currently extends State<Currently> {
                 Icons.login,
                 color: Colors.white,
               ),
-              onPressed: () =>  Navigator.push(
-            context, MaterialPageRoute(builder: (context) => SignInScreen()))
+              onPressed: () => signOut()
             ),
             const SizedBox(
               width: 20

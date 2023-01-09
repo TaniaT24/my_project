@@ -22,6 +22,7 @@ import 'package:firebase_database/firebase_database.dart';
 
    
 
+
 class readBooks extends StatefulWidget {
   
 const readBooks({Key? key}) : super(key: key);
@@ -34,22 +35,31 @@ class _readBooks extends State<readBooks> {
 
    final bookController=TextEditingController();
    final bookName='Book Name';
+  
+  late DatabaseReference _booksRef; 
+  
+  final user=FirebaseAuth.instance.currentUser!;
 
-  late DatabaseReference _booksRef;
+
+    signOut () async
+   {
+
+      await FirebaseAuth.instance.signOut();
+      Navigator.pushReplacement( context, MaterialPageRoute(builder: (context) => SignInScreen()));
+   }
 
   @override
   
   void initState() {
 
     final FirebaseDatabase database= FirebaseDatabase.instance;
-    _booksRef=database.reference().child('Read');
+    _booksRef=database.reference().child(user.uid).child('Read');
 
     super.initState();
     
   }
 
-
-
+  
 
 
    List<String> items= ['Read', 'Currently', 'WantToRead'];
@@ -90,7 +100,7 @@ class _readBooks extends State<readBooks> {
 
                     ),
                     TextButton(
-                      onPressed: () { ref.child('Read').push().child(bookName).set(bookController.text);
+                      onPressed: () { ref.child(user.uid).child('Read').push().child(bookName).set(bookController.text);
                       bookController.clear();
                       } , 
                       child: Text(' ADD NEW READ BOOK' ,style:TextStyle(color: Colors.white) ,selectionColor: Colors.brown,),
@@ -122,10 +132,10 @@ class _readBooks extends State<readBooks> {
       
 
         if(newvalue=='Currently')
-        ref.child(newvalue!).push().child('Book CName').set(snapshot.value['Book Name'] );
+        ref.child(user.uid).child(newvalue!).push().child('Book CName').set(snapshot.value['Book Name'] );
 
        if(newvalue=='WantToRead')
-        ref.child(newvalue!).push().child('Book WName').set(snapshot.value['Book Name'] );
+        ref.child(user.uid).child(newvalue!).push().child('Book WName').set(snapshot.value['Book Name'] );
 
 
       },
@@ -164,8 +174,9 @@ class _readBooks extends State<readBooks> {
                 Icons.login,
                 color: Colors.white,
               ),
-              onPressed: () =>  Navigator.push(
-            context, MaterialPageRoute(builder: (context) => SignInScreen()))
+              onPressed: () => signOut()
+              
+      
             ),
             const SizedBox(
               width: 20

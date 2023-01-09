@@ -31,13 +31,22 @@ class _want_toRead extends State<want_toRead> {
    final bookName='Book WName';
 
   late DatabaseReference _booksRef;
+   final user=FirebaseAuth.instance.currentUser!;
+
+
+    signOut () async
+   {
+
+      await FirebaseAuth.instance.signOut();
+      Navigator.pushReplacement( context, MaterialPageRoute(builder: (context) => SignInScreen()));
+   }
 
   @override
   
   void initState() {
 
     final FirebaseDatabase database= FirebaseDatabase.instance;
-    _booksRef=database.reference().child('WantToRead');
+    _booksRef=database.reference().child(user.uid).child('WantToRead');
 
     super.initState();
     
@@ -78,7 +87,7 @@ class _want_toRead extends State<want_toRead> {
 
                     ),
                     TextButton(
-                      onPressed: () { ref.child('WantToRead').push().child(bookName).set(bookController.text).asStream();
+                      onPressed: () { ref.child(user.uid).child('WantToRead').push().child(bookName).set(bookController.text).asStream();
                       bookController.clear();
                       } , 
                       child: Text(' ADD WANTED BOOK' ,style:TextStyle(color: Colors.white) ,selectionColor: Colors.brown,),
@@ -109,15 +118,15 @@ class _want_toRead extends State<want_toRead> {
        onChanged: (String? newvalue) {
         // This is called when the user selects an item.
         if(newvalue=='Read')
-       { ref.child(newvalue!).push().child('Book Name').set(snapshot.value['Book WName'] );
+       { ref.child(user.uid).child(newvalue!).push().child('Book Name').set(snapshot.value['Book WName'] );
        _booksRef.child(snapshot.key.toString()).remove();
        }
         if(newvalue=='Currently')
-       { ref.child(newvalue!).push().child('Book CName').set(snapshot.value['Book WName'] );
+       { ref.child(user.uid).child(newvalue!).push().child('Book CName').set(snapshot.value['Book WName'] );
         _booksRef.child(snapshot.key.toString()).remove();
        }
        if(newvalue=='Abandonated')
-       { ref.child(newvalue!).push().child('Book AName').set(snapshot.value['Book WName'] );
+       { ref.child(user.uid).child(newvalue!).push().child('Book AName').set(snapshot.value['Book WName'] );
         _booksRef.child(snapshot.key.toString()).remove();
        }
       
@@ -158,8 +167,7 @@ class _want_toRead extends State<want_toRead> {
                 Icons.login,
                 color: Colors.white,
               ),
-              onPressed: () =>  Navigator.push(
-            context, MaterialPageRoute(builder: (context) => SignInScreen()))
+              onPressed: () =>  signOut()
             ),
             const SizedBox(
               width: 20

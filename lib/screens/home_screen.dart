@@ -28,6 +28,19 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+
+
+ final user=FirebaseAuth.instance.currentUser!;
+
+
+    signOut () async
+   {
+
+      await FirebaseAuth.instance.signOut();
+      Navigator.pushReplacement( context, MaterialPageRoute(builder: (context) => SignInScreen()));
+   }
+
+
   @override
   Widget build(BuildContext context){
         List<String> images = [
@@ -117,8 +130,7 @@ child:
                 Icons.login,
                 color: Colors.white,
               ),
-              onPressed: () =>  Navigator.push(
-            context, MaterialPageRoute(builder: (context) => SignInScreen()))
+              onPressed: () =>  signOut()
             ),
             const SizedBox(
               width: 20
