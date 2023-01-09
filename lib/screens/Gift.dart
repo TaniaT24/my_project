@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:my_project/screens/Cont.dart';
-import 'package:my_project/screens/Gift.dart';
 import 'package:my_project/screens/signin_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -22,14 +21,14 @@ import '../widgets/customized_textfield.dart';
 
 
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+class GiftScreen extends StatefulWidget {
+  const GiftScreen({Key? key}) : super(key: key);
 
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  _GiftScreenState createState() => _GiftScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _GiftScreenState extends State<GiftScreen> {
 
 
  final user=FirebaseAuth.instance.currentUser!;
@@ -45,13 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context){
-        List<String> images = [
-      "assets/images/mak.jpg",
-      "assets/images/sa.png",
-      "assets/images/ima.jpg",
-       "assets/images/aba.jpg",
-      
-    ];
+  
 
     return Scaffold(
   body: Container(
@@ -62,53 +55,7 @@ class _HomeScreenState extends State<HomeScreen> {
           image: new DecorationImage(image: new AssetImage("assets/images/logodar.jpg"), fit: BoxFit.cover,opacity: 38),
           ),
           
-child:
-   GridView.builder(
-   itemCount: images.length,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: 5,
-                mainAxisSpacing: 30,
-              ),
-              itemBuilder: (BuildContext context, int index) {
-                return GestureDetector(
-     onTap: () {
-
-        if(index==0) Navigator.push( context, MaterialPageRoute(builder: (context) => readBooks()));
-        if(index==1) Navigator.push( context, MaterialPageRoute(builder: (context) => want_toRead()));
-        if(index==2) Navigator.push( context, MaterialPageRoute(builder: (context) => Currently()));
-        if(index==3) Navigator.push( context, MaterialPageRoute(builder: (context) => Abandonated()));
-         
-        },
-     child: Container(
-                   
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image.asset(images[index],height: 170,width:170,),
-                          if(index==0) Text( 'Read Books',
-                  style: TextStyle(fontStyle: FontStyle.italic,fontSize: 20, color: Color.fromARGB(255, 44, 14, 3)),
-                ),
-                  if(index==1) Text( 'Want to read',
-                  style: TextStyle(fontStyle: FontStyle.italic,fontSize: 20, color: Color.fromARGB(255, 44, 14, 3)),
-                ),
-                  if(index==2) Text( 'Currently reading',
-                  style: TextStyle(fontStyle: FontStyle.italic,fontSize: 20, color: Color.fromARGB(255, 44, 14, 3)),
-                ),
-                  if(index==3) Text( 'Abandonated books',
-                  style: TextStyle(fontStyle: FontStyle.italic,fontSize: 20, color: Color.fromARGB(255, 44, 14, 3)),
-                )
-                
-                ]
-                    
-                    , 
-                      ),
-                    
-    ),
-                );
-    
-              },
-            ),
+   
           ),
           
            bottomNavigationBar: BottomAppBar(
@@ -149,7 +96,7 @@ child:
                 Icons.settings,
                 color: Colors.white,
               ),
-              onPressed:  () => Navigator.push(
+              onPressed: () => Navigator.push(
             context, MaterialPageRoute(builder: (context) => ContScreen())),
             ),
           ],

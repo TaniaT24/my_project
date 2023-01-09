@@ -1,4 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:my_project/screens/Cont.dart';
+import 'package:my_project/screens/Gift.dart';
 import 'package:my_project/screens/signin_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -188,14 +190,16 @@ class _Abandonated extends State<Abandonated> {
                 Icons.settings,
                 color: Colors.white,
               ),
-              onPressed: () {},
+              onPressed:  () => Navigator.push(
+            context, MaterialPageRoute(builder: (context) => ContScreen())),
             ),
           ],
         ),
       ),
       // implement the floating button
       floatingActionButton: FloatingActionButton(
-          onPressed: () {},
+          onPressed:  () => Navigator.push(
+            context, MaterialPageRoute(builder: (context) => GiftScreen())),
           backgroundColor: Color.fromARGB(255, 6, 5, 4),
           child: const Icon(Icons.card_giftcard)),
      
