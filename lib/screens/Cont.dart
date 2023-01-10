@@ -1,7 +1,9 @@
 import 'dart:convert';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:my_project/screens/Gift.dart';
+import 'package:my_project/screens/change_pass.dart';
 import 'package:my_project/screens/signin_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -32,6 +34,11 @@ class _ContScreenState extends State<ContScreen> {
 
 
  final user=FirebaseAuth.instance.currentUser!;
+
+
+
+   final ref=FirebaseDatabase.instance.reference();
+
 
 
     signOut () async
@@ -76,17 +83,26 @@ class _ContScreenState extends State<ContScreen> {
               style: TextStyle(fontWeight: FontWeight.w500),
             ),
             leading: Icon(
-              Icons.contact_phone,
+              Icons.email,
               color: Colors.blue[500],
+              
             ),
           ),
-          ListTile(
-            title: Text('Number of read books:'),
-            leading: Icon(
-              Icons.format_list_numbered,
-              color: Colors.blue[500],
+          ListTile(  title:Text("Change your password") , leading:
+            IconButton(
+              icon: const Icon(
+                Icons.password,
+                color: Color.fromARGB(255, 26, 41, 155),
+              ),
+              onPressed: () => Navigator.push(
+            context, MaterialPageRoute(builder: (context) => ChangePass())),
+              
+      
             ),
+
+
           ),
+          
         ],
       ),
     ),
