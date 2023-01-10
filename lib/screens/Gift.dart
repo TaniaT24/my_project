@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:my_project/screens/Cont.dart';
 import 'package:my_project/screens/signin_screen.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +18,6 @@ import 'package:my_project/screens/Currently.dart';
 import 'package:my_project/screens/want_toRead.dart';
 import 'package:my_project/screens/Abandonated.dart';
 import '../widgets/customized_textfield.dart';
-
 
 
 
@@ -42,9 +42,10 @@ class _GiftScreenState extends State<GiftScreen> {
    }
 
 
+
   @override
   Widget build(BuildContext context){
-  
+
 
     return Scaffold(
   body: Container(
@@ -54,10 +55,47 @@ class _GiftScreenState extends State<GiftScreen> {
         decoration: BoxDecoration(
           image: new DecorationImage(image: new AssetImage("assets/images/logodar.jpg"), fit: BoxFit.cover,opacity: 38),
           ),
-          
-   
-          ),
-          
+       
+       child:  Container( 
+        margin:EdgeInsets.symmetric(vertical: 130.0),
+         child:   Wrap(children:[  Text(          
+                              '    Your friend favourite genre?',
+                              style: TextStyle(fontStyle: FontStyle.italic,fontSize: 21.5,letterSpacing:3 ,fontWeight:FontWeight.bold),
+                              
+         ),
+         
+            Card( margin:EdgeInsets.only(top:120,left:120),
+            child: 
+             Padding( 
+                padding: const EdgeInsets.all(20.0),
+                child: TextButton(onPressed: () => Navigator.push(
+            context, MaterialPageRoute(builder: (context) => ContScreen())),
+                  child:Text('Romance',
+                  style: TextStyle(fontSize: 22.0),)
+                  
+                  
+                   )
+                ),),
+
+        
+             Card( margin:EdgeInsets.only(top: 5,left: 120),
+            child: 
+             Padding( 
+                padding: const EdgeInsets.all(20.0),
+                child: Text('   Crime   ',
+                  style: TextStyle(fontSize: 22.0),
+                ),),),
+
+
+
+
+
+         ],
+        
+         ),
+
+  ),
+  ),
            bottomNavigationBar: BottomAppBar(
         color: Color.fromARGB(255, 17, 17, 16),
         // this creates a notch in the center of the bottom bar

@@ -29,7 +29,7 @@ class ChangePass extends StatefulWidget {
 class _ChangePassState extends State<ChangePass> {
 
   final _formKey=GlobalKey<FormState>();
-  String newPassword;
+   late String newPassword;
   final newPasswordControler=TextEditingController();
   final currentUser= FirebaseAuth.instance.currentUser;
 

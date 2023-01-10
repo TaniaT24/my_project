@@ -131,7 +131,7 @@ class _Abandonated extends State<Abandonated> {
         _booksRef.child(snapshot.key.toString()).remove();
        }
         if(newvalue=='WantToRead')
-        {ref.child(user.uid).child(newvalue!).push().child('Book wName').set(snapshot.value['Book AName'] );
+        {ref.child(user.uid).child(newvalue!).push().child('Book WName').set(snapshot.value['Book AName'] );
          _booksRef.child(snapshot.key.toString()).remove();}
 
 
