@@ -2,7 +2,11 @@ import 'dart:convert';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
+import 'package:my_project/screens/Adventure.dart';
 import 'package:my_project/screens/Cont.dart';
+import 'package:my_project/screens/Fantasy.dart';
+import 'package:my_project/screens/Mystery.dart';
+import 'package:my_project/screens/Romance.dart';
 import 'package:my_project/screens/signin_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -69,7 +73,7 @@ class _GiftScreenState extends State<GiftScreen> {
              Padding( 
                 padding: const EdgeInsets.all(20.0),
                 child: TextButton(onPressed: () => Navigator.push(
-            context, MaterialPageRoute(builder: (context) => ContScreen())),
+            context, MaterialPageRoute(builder: (context) => RomanceScreen())),
                   child:Text('Romance',
                   style: TextStyle(fontSize: 22.0),)
                   
@@ -81,10 +85,35 @@ class _GiftScreenState extends State<GiftScreen> {
              Card( margin:EdgeInsets.only(top: 5,left: 120),
             child: 
              Padding( 
-                padding: const EdgeInsets.all(20.0),
-                child: Text('   Crime   ',
+                padding: const EdgeInsets.all(10.0),
+                child: TextButton(onPressed: () => Navigator.push(
+            context, MaterialPageRoute(builder: (context) => MysteryScreen())),
+                child: Text('   Mystery   ',
                   style: TextStyle(fontSize: 22.0),
                 ),),),
+             ),
+
+            Card( margin:EdgeInsets.only(top: 5,left: 120),
+            child: 
+             Padding( 
+                padding: const EdgeInsets.all(10.0),
+                child: TextButton(onPressed: () => Navigator.push(
+            context, MaterialPageRoute(builder: (context) => FantasyScreen())),
+                child: Text('   Fantasy   ',
+                  style: TextStyle(fontSize: 22.0),
+                ),),),
+            ),
+                 Card( margin:EdgeInsets.only(top: 5,left: 120),
+            child: 
+             Padding( 
+                padding: const EdgeInsets.all(10.0),
+                  child: TextButton(onPressed: () => Navigator.push(
+            context, MaterialPageRoute(builder: (context) => AdventureScreen())),
+                child: Text(' Adventure ',
+                  style: TextStyle(fontSize: 22.0),
+                ),),),
+                 ),
+
 
 
 

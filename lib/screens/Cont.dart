@@ -65,34 +65,35 @@ class _ContScreenState extends State<ContScreen> {
   SizedBox(
   
     height: 210,
-    child: Card(
+    child: Card( margin: EdgeInsets.all(20),
       child: Column(
         children: [
           ListTile(
-            title: Text('My Account'),
-           
+            title: Text(' My Account ' ,style: TextStyle(fontSize: 28.0)),
+            
             leading: Icon(
-              Icons.restaurant_menu,
-              color: Colors.blue[500],
+              Icons.menu_book,
+              color: Colors.brown[500],
+              size: 50,
             ),
           ),
           const Divider(),
-          ListTile(
+          ListTile( 
             title:Text(
               user.email!,
-              style: TextStyle(fontWeight: FontWeight.w500),
+              style: TextStyle(fontWeight: FontWeight.w500,fontSize: 18),
             ),
             leading: Icon(
-              Icons.email,
-              color: Colors.blue[500],
+              Icons.email,size:35,
+              color: Colors.brown[500],
               
             ),
           ),
-          ListTile(  title:Text("Change your password") , leading:
+          ListTile(  title:Text("Change your password", style: TextStyle(fontWeight: FontWeight.w500,fontSize: 18)) , leading:
             IconButton(
               icon: const Icon(
-                Icons.password,
-                color: Color.fromARGB(255, 26, 41, 155),
+                Icons.password,size: 35,
+                color:Colors.brown,
               ),
               onPressed: () => Navigator.push(
             context, MaterialPageRoute(builder: (context) => ChangePass())),

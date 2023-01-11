@@ -107,7 +107,7 @@ body: Form(key: _formKey,
 
     ),
     
-   ElevatedButton(onPressed: (){
+   ElevatedButton( onPressed: (){
 
    if(_formKey.currentState!.validate())
    {
@@ -118,7 +118,7 @@ body: Form(key: _formKey,
    }
 
 
-   }, child: Text('Change Password',style: TextStyle(fontSize: 18.0), )),
+   }, child:  Text('Change Password',style: TextStyle(fontSize: 18.0), )),
 
     ],
     ),
